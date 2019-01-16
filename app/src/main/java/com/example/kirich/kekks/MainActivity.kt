@@ -78,6 +78,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
     override fun onPause() {
         super.onPause()
-        mSensorManager!!.unregisterListener(this)
+        //mSensorManager!!.unregisterListener(this)
     }
 }

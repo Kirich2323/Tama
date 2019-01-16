@@ -12,7 +12,7 @@ import android.hardware.SensorManager
 import android.util.Rational
 import android.view.View
 import android.widget.Button
-import android.widget.ImageView
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), SensorEventListener {
 
@@ -27,15 +27,12 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val iv = findViewById(R.id.imageView) as ImageView
-        world = World(iv)
+        world = World(imageView)
         Thread(Runnable {
             world?.run()
         }).start()
 
-        val pictureBtn : Button = findViewById(R.id.pictureInPictureButton)
-
-        pictureBtn.setOnClickListener {
+        pictureInPictureButton.setOnClickListener {
             val ar = Rational(world!!.maxX, world!!.maxY)
             val params = PictureInPictureParams.Builder().setAspectRatio(ar)
             enterPictureInPictureMode(params.build())
@@ -54,11 +51,11 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
         if (isInPictureInPictureMode) {
             supportActionBar?.hide()
-            findViewById<Button>(R.id.pictureInPictureButton).visibility = View.INVISIBLE
+            pictureInPictureButton.visibility = View.INVISIBLE
         }
         else {
             supportActionBar?.show()
-            findViewById<Button>(R.id.pictureInPictureButton).visibility = View.VISIBLE
+            pictureInPictureButton.visibility = View.VISIBLE
         }
     }
 
